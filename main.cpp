@@ -580,6 +580,22 @@ void validateFundamentalMatrix() {
     std::cout << "Line slope: " << -a/b << " (should be close to 0 for horizontal baseline)" << std::endl;
 }
 
+std::unordered_map<int, std::unordered_map<int, TrackInfo>> look_up_converter(const FrameData& frame) {
+    // Make it easily accessible to track by camera id and track id
+    std::unordered_map<int, std::unordered_map<int, TrackInfo>> look_up;
+    for (const auto& cam_tracks : frame.camera_tracks) {
+        // Get the camera id for this camera
+        int cam_id = std::stoi(cam_tracks.camera_id);
+
+        // Fill in the look up for this key
+        for (const auto& track : cam_tracks.tracks) {
+            look_up[cam_id][track.track_id] = track;
+        }
+    }
+
+    return look_up;
+};
+
 int main() {
     std::cout << "=== Comprehensive Epipolar Gating Test Suite ===" << std::endl;
     
@@ -655,6 +671,7 @@ int main() {
     for (const auto& frame : test_cases) {
         auto binary_mask = EpipolarGating(frame);
         printTestResults(frame.frame_id, binary_mask);
+        // look_up = look_up_converter(frame);
         
         // Print detailed summary statistics
         int total_associations = 0;
@@ -686,6 +703,46 @@ int main() {
     }
 
     // Build the cost matrix here
+    // Run original test cases
+    std::cout << "\n=== ORIGINAL TEST CASES (COST MATRIX) ===" << std::endl;
+    std::vector<FrameData> cost_matrix_test_cases = {
+        createTestCase1(), // Equal tracks
+        createTestCase2(), // More tracks in cam1
+        createTestCase3(), // More tracks in cam2
+        createTestCase4(), // Edge positions
+        createTestCase5(), // Empty cam2
+        createTestCase6(), // Both empty
+        createTestCase7(), // Single camera
+        createTestCase8(), // Medium tracks
+        createTestCase9()  // Close tracks
+    };
+
+    for (const auto& frame : cost_matrix_test_cases) {
+        // For each frame, build a cost matrix for:
+        // - IoU of bounding boxes
+        // - Width/Height Ratios
+        // - Subclassification confidence differences
+
+        // Get the binary mask from epipolar gating
+        std::unordered_map<int, std::unordered_map<int, bool>> binary_mask = EpipolarGating(frame);
+        std::unordered_map<int, std::unordered_map<int, TrackInfo>> look_up = look_up_converter(frame);
+        
+        // At this point, we have the binary mask and the look up table
+        // We will want to only build costs for allowed pairs
+
+        // Iterate through the binary mask
+        for (const auto& entry : binary_mask) {
+            // Make an IoU cost matrix
+
+            // Make a width/height ratio cost matrix
+            
+            // Make a subclassification confidence difference cost matrix
+        
+            // Put all these together into a final cost matrix
+        }
+
+    }
+        
 
     // Solve the assignment problem via Hungarian here
 
