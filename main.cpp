@@ -3,6 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <utility>
+#include <string>
 #include <opencv2/opencv.hpp>
 #include <opencv2/calib3d.hpp>
 
@@ -22,12 +23,12 @@ struct TrackInfo{
 };
 
 struct CameraTracks {
-    std::string camera_id;
+    int camera_id;
     std::vector<TrackInfo> tracks;
 };
 
 struct FrameData {
-    std::string frame_id;
+    int frame_id;
     std::vector<CameraTracks> camera_tracks;
 };
 
@@ -227,7 +228,7 @@ std::unordered_map<int, std::vector<std::pair<int, bool>>> EpipolarGating(const 
 }
 
 // Helper function to print test results with better formatting
-void printTestResults(const std::string& test_name, const std::unordered_map<int, std::vector<std::pair<int, bool>>>& binary_mask) {
+void printTestResults(const int& test_name, const std::unordered_map<int, std::vector<std::pair<int, bool>>>& binary_mask) {
     std::cout << "\n=== " << test_name << " ===" << std::endl;
     
     if (binary_mask.empty()) {
@@ -290,11 +291,11 @@ std::pair<cv::Point2d, cv::Point2d> generateStereoCorrespondence(
 // Test case for debugging epipolar distances with realistic stereo data
 FrameData createRealisticDebugTestCase() {
     FrameData frame;
-    frame.frame_id = "realistic_debug_epipolar_distances";
+    frame.frame_id = 0;
 
     CameraTracks cam1, cam2;
-    cam1.camera_id = "camera_2";
-    cam2.camera_id = "camera_3";
+    cam1.camera_id = 2;
+    cam2.camera_id = 3;
     
     // Test objects at different depths
     struct TestObject {
@@ -337,11 +338,11 @@ FrameData createRealisticDebugTestCase() {
 // Test case 1: Equal number of tracks with realistic stereo geometry
 FrameData createTestCase1() {
     FrameData frame;
-    frame.frame_id = "test_case_1_equal_tracks_realistic";
+    frame.frame_id = 1;
 
     CameraTracks cam1, cam2;
-    cam1.camera_id = "camera_2";
-    cam2.camera_id = "camera_3";
+    cam1.camera_id = 2;
+    cam2.camera_id = 3;
     
     // Define realistic test scenarios with proper depth
     struct ScenarioObject {
@@ -376,10 +377,10 @@ FrameData createTestCase1() {
 // Test case 2: Camera 1 has more tracks than Camera 2
 FrameData createTestCase2() {
     FrameData frame;
-    frame.frame_id = "test_case_2_unequal_more_cam1";
+    frame.frame_id = 22;
 
     CameraTracks cam1;
-    cam1.camera_id = "camera_2";
+    cam1.camera_id = 2;
     cam1.tracks.push_back(createTrack(10, 200, 200));
     cam1.tracks.push_back(createTrack(11, 400, 200));
     cam1.tracks.push_back(createTrack(12, 600, 200));
@@ -388,7 +389,7 @@ FrameData createTestCase2() {
     cam1.tracks.push_back(createTrack(15, 700, 400));
     
     CameraTracks cam2;
-    cam2.camera_id = "camera_3";
+    cam2.camera_id = 3;
     // Only 3 tracks in camera 2
     cam2.tracks.push_back(createTrack(20, 195, 195));
     cam2.tracks.push_back(createTrack(21, 395, 195));
@@ -402,16 +403,16 @@ FrameData createTestCase2() {
 // Test case 3: Camera 2 has more tracks than Camera 1
 FrameData createTestCase3() {
     FrameData frame;
-    frame.frame_id = "test_case_3_unequal_more_cam2";
+    frame.frame_id = 3;
 
     CameraTracks cam1;
-    cam1.camera_id = "camera_2";
+    cam1.camera_id = 2;
     // Only 2 tracks in camera 1
     cam1.tracks.push_back(createTrack(30, 350, 250));
     cam1.tracks.push_back(createTrack(31, 750, 350));
     
     CameraTracks cam2;
-    cam2.camera_id = "camera_3";
+    cam2.camera_id = 3;
     // 5 tracks in camera 2
     cam2.tracks.push_back(createTrack(40, 345, 245));
     cam2.tracks.push_back(createTrack(41, 745, 345));
@@ -427,10 +428,10 @@ FrameData createTestCase3() {
 // Test case 4: Edge positions (corners and edges of image)
 FrameData createTestCase4() {
     FrameData frame;
-    frame.frame_id = "test_case_4_edge_positions";
+    frame.frame_id = 4;
 
     CameraTracks cam1;
-    cam1.camera_id = "camera_2";
+    cam1.camera_id = 2;
     cam1.tracks.push_back(createTrack(50, 10, 10));     // Top-left corner
     cam1.tracks.push_back(createTrack(51, 1270, 10));   // Top-right corner
     cam1.tracks.push_back(createTrack(52, 10, 710));    // Bottom-left corner
@@ -439,7 +440,7 @@ FrameData createTestCase4() {
     cam1.tracks.push_back(createTrack(55, 640, 710));   // Bottom center
     
     CameraTracks cam2;
-    cam2.camera_id = "camera_3";
+    cam2.camera_id = 3;
     // Corresponding positions with slight shifts
     cam2.tracks.push_back(createTrack(60, 5, 5));
     cam2.tracks.push_back(createTrack(61, 1265, 5));
@@ -456,15 +457,15 @@ FrameData createTestCase4() {
 // Test case 5: One camera has no tracks
 FrameData createTestCase5() {
     FrameData frame;
-    frame.frame_id = "test_case_5_empty_camera";
+    frame.frame_id = 5;
 
     CameraTracks cam1;
-    cam1.camera_id = "camera_2";
+    cam1.camera_id = 2;
     cam1.tracks.push_back(createTrack(70, 400, 300));
     cam1.tracks.push_back(createTrack(71, 800, 400));
     
     CameraTracks cam2;
-    cam2.camera_id = "camera_3";
+    cam2.camera_id = 3;
     // No tracks in camera 2
     
     frame.camera_tracks.push_back(cam1);
@@ -475,13 +476,13 @@ FrameData createTestCase5() {
 // Test case 6: Both cameras have no tracks
 FrameData createTestCase6() {
     FrameData frame;
-    frame.frame_id = "test_case_6_both_empty";
+    frame.frame_id = 6;
 
     CameraTracks cam1;
-    cam1.camera_id = "camera_2";
+    cam1.camera_id = 2;
     
     CameraTracks cam2;
-    cam2.camera_id = "camera_3";
+    cam2.camera_id = 3;
     
     frame.camera_tracks.push_back(cam1);
     frame.camera_tracks.push_back(cam2);
@@ -491,10 +492,10 @@ FrameData createTestCase6() {
 // Test case 7: Single camera (edge case)
 FrameData createTestCase7() {
     FrameData frame;
-    frame.frame_id = "test_case_7_single_camera";
+    frame.frame_id = 7;
 
     CameraTracks cam1;
-    cam1.camera_id = "camera_2";
+    cam1.camera_id = 2;
     cam1.tracks.push_back(createTrack(80, 400, 300));
     cam1.tracks.push_back(createTrack(81, 600, 400));
     
@@ -506,13 +507,13 @@ FrameData createTestCase7() {
 // Test case 8: Medium tracks stress test
 FrameData createTestCase8() {
     FrameData frame;
-    frame.frame_id = "test_case_8_medium_tracks";
+    frame.frame_id = 8;
 
     CameraTracks cam1;
-    cam1.camera_id = "camera_2";
+    cam1.camera_id = 2;
     
     CameraTracks cam2;
-    cam2.camera_id = "camera_3";
+    cam2.camera_id = 3;
     
     // Create a smaller grid of tracks (3x2 = 6 tracks each)
     int track_id = 100;
@@ -532,15 +533,15 @@ FrameData createTestCase8() {
 // Test case 9: Very close tracks (potential false positives)
 FrameData createTestCase9() {
     FrameData frame;
-    frame.frame_id = "test_case_9_close_tracks";
+    frame.frame_id = 9;
 
     CameraTracks cam1;
-    cam1.camera_id = "camera_2";
+    cam1.camera_id = 2;
     cam1.tracks.push_back(createTrack(200, 400, 300));
     cam1.tracks.push_back(createTrack(201, 405, 305)); // Very close to track 200
     
     CameraTracks cam2;
-    cam2.camera_id = "camera_3";
+    cam2.camera_id = 3;
     cam2.tracks.push_back(createTrack(210, 395, 295));
     cam2.tracks.push_back(createTrack(211, 400, 300)); // Very close to track 210
     
@@ -585,7 +586,7 @@ std::unordered_map<int, std::unordered_map<int, TrackInfo>> look_up_converter(co
     std::unordered_map<int, std::unordered_map<int, TrackInfo>> look_up;
     for (const auto& cam_tracks : frame.camera_tracks) {
         // Get the camera id for this camera
-        int cam_id = std::stoi(cam_tracks.camera_id);
+        int cam_id = cam_tracks.camera_id;
 
         // Fill in the look up for this key
         for (const auto& track : cam_tracks.tracks) {
@@ -719,12 +720,12 @@ int main() {
 
     for (const auto& frame : cost_matrix_test_cases) {
         // For each frame, build a cost matrix for:
-        // - IoU of bounding boxes
+        // - IoU of bounding boxes (Not sure if we're doing this anymore)
         // - Width/Height Ratios
         // - Subclassification confidence differences
 
         // Get the binary mask from epipolar gating
-        std::unordered_map<int, std::unordered_map<int, bool>> binary_mask = EpipolarGating(frame);
+        std::unordered_map<int, std::vector<std::pair<int, bool>>> binary_mask = EpipolarGating(frame);
         std::unordered_map<int, std::unordered_map<int, TrackInfo>> look_up = look_up_converter(frame);
         
         // At this point, we have the binary mask and the look up table
@@ -733,12 +734,25 @@ int main() {
         // Iterate through the binary mask
         for (const auto& entry : binary_mask) {
             // Make an IoU cost matrix
+            std::unordered_map<int, std::unordered_map<int, float>> iou_cost_matrix;
+
+            // Iterate through the allowed pairs
+            // For now just iterate through the pairs that are allowed (This does not eliminate duplicate pairs, should implement this)
+            for (const auto& pair: entry.second) {
+                if (pair.second) { // If allowed
+                    std::cout << "Allowed pair: Track " << entry.first << " <-> Track " << pair.first << std::endl;
+                }
+            }
+            std::cout << std::endl;
 
             // Make a width/height ratio cost matrix
+            std::unordered_map<int, std::unordered_map<int, float>> wh_ratio_cost_matrix;
             
             // Make a subclassification confidence difference cost matrix
+            std::unordered_map<int, std::unordered_map<int, float>> subclass_conf_cost_matrix;
         
             // Put all these together into a final cost matrix
+            std::unordered_map<int, std::unordered_map<int, float>> final_cost_matrix;
         }
 
     }
