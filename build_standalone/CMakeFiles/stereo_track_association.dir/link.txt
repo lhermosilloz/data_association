@@ -1,0 +1,2 @@
+/usr/bin/ar qc libstereo_track_association.a CMakeFiles/stereo_track_association.dir/stereo_track_association.cpp.o
+/usr/bin/ranlib libstereo_track_association.a
