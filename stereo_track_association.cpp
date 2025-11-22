@@ -1,7 +1,7 @@
 #include "stereo_track_association.h"
 
 StereoTrackAssociator::StereoTrackAssociator() 
-    : epipolar_threshold_(10.0), max_assignment_cost_(1.0) {
+    : epipolar_threshold_(30.0), max_assignment_cost_(1.0) {
     initializeCameraMatrices();
 }
 
@@ -156,7 +156,7 @@ std::unordered_map<int, std::unordered_map<int, float>> StereoTrackAssociator::b
     std::set<std::pair<int, int>> processed_pairs;
     
     for (const auto& entry : binary_mask) {
-        int idA = entry.first;
+        int idA = entry.first; // The first track ID to consider
         
         if (lookup.at(2).find(idA) == lookup.at(2).end()) {
             continue;

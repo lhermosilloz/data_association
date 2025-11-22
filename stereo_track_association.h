@@ -47,8 +47,8 @@ struct CorrespondedTrack {
     float assignment_cost;
     Point3D world_position;
     double depth_meters;
-    bool is_valid;
-    double epipolar_distance;
+    bool is_valid;              // True if triangulation succeeded and depth is in [0.5m, 100m] range
+    double epipolar_distance;   // Epipolar constraint distance in pixels
 };
 
 struct StereoAssociationResult {

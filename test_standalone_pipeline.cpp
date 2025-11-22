@@ -113,13 +113,13 @@ int main() {
             createTrack(103, 800, 350, 0.85f, 0.75f, 0.10f, dims_12m.first, dims_12m.second)   // Armed military crouching
         };
         
-        // Camera 3 tracks
+        // Camera 3 tracks (positioned closer to epipolar lines)
         CameraTracks cam3_tracks;
         cam3_tracks.camera_id = 3;
         cam3_tracks.tracks = {
-            createTrack(201, 350, 305, 0.93f, 0.82f, 0.18f, dims_5m.first, dims_5m.second),    // Armed military standing
-            createTrack(202, 540, 245, 0.88f, 0.78f, 0.25f, dims_8m.first, dims_8m.second),    // Armed military standing
-            createTrack(203, 720, 355, 0.87f, 0.73f, 0.12f, dims_12m.first, dims_12m.second)   // Armed military crouching
+            createTrack(201, 380, 300, 0.93f, 0.82f, 0.18f, dims_5m.first, dims_5m.second),    // Armed military standing
+            createTrack(202, 580, 250, 0.88f, 0.78f, 0.25f, dims_8m.first, dims_8m.second),    // Armed military standing
+            createTrack(203, 780, 350, 0.87f, 0.73f, 0.12f, dims_12m.first, dims_12m.second)   // Armed military crouching
         };
         
         frame.camera_tracks.push_back(cam2_tracks);
@@ -171,14 +171,14 @@ int main() {
             createTrack(113, 750, 290, 0.10f, 0.20f, 0.90f, dims_15m.first, dims_15m.second)    // Unarmed civilian surrendering
         };
         
-        // Camera 3 tracks (one extra unmatched track)
+        // Camera 3 tracks (positioned for better correspondence + one extra unmatched)
         CameraTracks cam3_tracks;
         cam3_tracks.camera_id = 3;
         cam3_tracks.tracks = {
-            createTrack(211, 250, 285, 0.12f, 0.22f, 0.08f, dims_6m.first, dims_6m.second),     // Unarmed civilian
-            createTrack(212, 440, 315, 0.85f, 0.75f, 0.25f, dims_10m.first, dims_10m.second),   // Armed military
-            createTrack(213, 670, 295, 0.08f, 0.18f, 0.85f, dims_15m.first, dims_15m.second),   // Unarmed civilian surrendering
-            createTrack(214, 900, 400, 0.50f, 0.60f, 0.20f, dims_10m.first, dims_10m.second)    // Extra unmatched track
+            createTrack(211, 280, 280, 0.12f, 0.22f, 0.08f, dims_6m.first, dims_6m.second),     // Unarmed civilian
+            createTrack(212, 480, 320, 0.85f, 0.75f, 0.25f, dims_10m.first, dims_10m.second),   // Armed military
+            createTrack(213, 730, 290, 0.08f, 0.18f, 0.85f, dims_15m.first, dims_15m.second),   // Unarmed civilian surrendering
+            createTrack(214, 950, 400, 0.50f, 0.60f, 0.20f, dims_10m.first, dims_10m.second)    // Extra unmatched track
         };
         
         frame.camera_tracks.push_back(cam2_tracks);
