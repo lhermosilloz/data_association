@@ -16,6 +16,13 @@ add_library(stereo_track_association
 )
 target_link_libraries(stereo_track_association ${OpenCV_LIBS})
 
+# Create adaptive stereo library
+add_library(adaptive_stereo_association
+    adaptive_stereo_association.cpp
+    stereo_track_association.cpp
+)
+target_link_libraries(adaptive_stereo_association ${OpenCV_LIBS})
+
 # Test program for standalone API
 add_executable(test_pipeline 
     test_standalone_pipeline.cpp
@@ -28,11 +35,23 @@ add_executable(enhanced_program
 )
 target_link_libraries(enhanced_program ${OpenCV_LIBS})
 
+# Diagnostic test for stationary scene issues
+add_executable(test_stationary
+    test_stationary_scenes.cpp
+)
+target_link_libraries(test_stationary stereo_track_association ${OpenCV_LIBS})
+
+# Adaptive system demonstration
+add_executable(test_adaptive
+    test_adaptive_system.cpp
+)
+target_link_libraries(test_adaptive adaptive_stereo_association ${OpenCV_LIBS})
+
 # Install rules
-install(TARGETS stereo_track_association test_pipeline enhanced_program
+install(TARGETS stereo_track_association adaptive_stereo_association test_pipeline enhanced_program test_stationary test_adaptive
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib)
 
-install(FILES stereo_track_association.h 
+install(FILES stereo_track_association.h adaptive_stereo_association.h
         DESTINATION include)

@@ -85,6 +85,51 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonciao/association/build/CMakeFiles /home/leonciao/association/build//CMakeFiles/progress.marks
@@ -117,24 +162,113 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named my_program
+# Target rules for targets named stereo_track_association
 
 # Build rule for target.
-my_program: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_program
-.PHONY : my_program
+stereo_track_association: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stereo_track_association
+.PHONY : stereo_track_association
 
 # fast build rule for target.
-my_program/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_program.dir/build.make CMakeFiles/my_program.dir/build
-.PHONY : my_program/fast
+stereo_track_association/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_track_association.dir/build.make CMakeFiles/stereo_track_association.dir/build
+.PHONY : stereo_track_association/fast
+
+#=============================================================================
+# Target rules for targets named adaptive_stereo_association
+
+# Build rule for target.
+adaptive_stereo_association: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 adaptive_stereo_association
+.PHONY : adaptive_stereo_association
+
+# fast build rule for target.
+adaptive_stereo_association/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/adaptive_stereo_association.dir/build.make CMakeFiles/adaptive_stereo_association.dir/build
+.PHONY : adaptive_stereo_association/fast
+
+#=============================================================================
+# Target rules for targets named test_pipeline
+
+# Build rule for target.
+test_pipeline: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_pipeline
+.PHONY : test_pipeline
+
+# fast build rule for target.
+test_pipeline/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_pipeline.dir/build.make CMakeFiles/test_pipeline.dir/build
+.PHONY : test_pipeline/fast
+
+#=============================================================================
+# Target rules for targets named enhanced_program
+
+# Build rule for target.
+enhanced_program: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 enhanced_program
+.PHONY : enhanced_program
+
+# fast build rule for target.
+enhanced_program/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/enhanced_program.dir/build.make CMakeFiles/enhanced_program.dir/build
+.PHONY : enhanced_program/fast
+
+#=============================================================================
+# Target rules for targets named test_stationary
+
+# Build rule for target.
+test_stationary: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_stationary
+.PHONY : test_stationary
+
+# fast build rule for target.
+test_stationary/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stationary.dir/build.make CMakeFiles/test_stationary.dir/build
+.PHONY : test_stationary/fast
+
+#=============================================================================
+# Target rules for targets named test_adaptive
+
+# Build rule for target.
+test_adaptive: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_adaptive
+.PHONY : test_adaptive
+
+# fast build rule for target.
+test_adaptive/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_adaptive.dir/build.make CMakeFiles/test_adaptive.dir/build
+.PHONY : test_adaptive/fast
+
+adaptive_stereo_association.o: adaptive_stereo_association.cpp.o
+.PHONY : adaptive_stereo_association.o
+
+# target to build an object file
+adaptive_stereo_association.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/adaptive_stereo_association.dir/build.make CMakeFiles/adaptive_stereo_association.dir/adaptive_stereo_association.cpp.o
+.PHONY : adaptive_stereo_association.cpp.o
+
+adaptive_stereo_association.i: adaptive_stereo_association.cpp.i
+.PHONY : adaptive_stereo_association.i
+
+# target to preprocess a source file
+adaptive_stereo_association.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/adaptive_stereo_association.dir/build.make CMakeFiles/adaptive_stereo_association.dir/adaptive_stereo_association.cpp.i
+.PHONY : adaptive_stereo_association.cpp.i
+
+adaptive_stereo_association.s: adaptive_stereo_association.cpp.s
+.PHONY : adaptive_stereo_association.s
+
+# target to generate assembly for a file
+adaptive_stereo_association.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/adaptive_stereo_association.dir/build.make CMakeFiles/adaptive_stereo_association.dir/adaptive_stereo_association.cpp.s
+.PHONY : adaptive_stereo_association.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_program.dir/build.make CMakeFiles/my_program.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/enhanced_program.dir/build.make CMakeFiles/enhanced_program.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -142,7 +276,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_program.dir/build.make CMakeFiles/my_program.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/enhanced_program.dir/build.make CMakeFiles/enhanced_program.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -150,8 +284,107 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_program.dir/build.make CMakeFiles/my_program.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/enhanced_program.dir/build.make CMakeFiles/enhanced_program.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+stereo_track_association.o: stereo_track_association.cpp.o
+.PHONY : stereo_track_association.o
+
+# target to build an object file
+stereo_track_association.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_track_association.dir/build.make CMakeFiles/stereo_track_association.dir/stereo_track_association.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/adaptive_stereo_association.dir/build.make CMakeFiles/adaptive_stereo_association.dir/stereo_track_association.cpp.o
+.PHONY : stereo_track_association.cpp.o
+
+stereo_track_association.i: stereo_track_association.cpp.i
+.PHONY : stereo_track_association.i
+
+# target to preprocess a source file
+stereo_track_association.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_track_association.dir/build.make CMakeFiles/stereo_track_association.dir/stereo_track_association.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/adaptive_stereo_association.dir/build.make CMakeFiles/adaptive_stereo_association.dir/stereo_track_association.cpp.i
+.PHONY : stereo_track_association.cpp.i
+
+stereo_track_association.s: stereo_track_association.cpp.s
+.PHONY : stereo_track_association.s
+
+# target to generate assembly for a file
+stereo_track_association.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_track_association.dir/build.make CMakeFiles/stereo_track_association.dir/stereo_track_association.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/adaptive_stereo_association.dir/build.make CMakeFiles/adaptive_stereo_association.dir/stereo_track_association.cpp.s
+.PHONY : stereo_track_association.cpp.s
+
+test_adaptive_system.o: test_adaptive_system.cpp.o
+.PHONY : test_adaptive_system.o
+
+# target to build an object file
+test_adaptive_system.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_adaptive.dir/build.make CMakeFiles/test_adaptive.dir/test_adaptive_system.cpp.o
+.PHONY : test_adaptive_system.cpp.o
+
+test_adaptive_system.i: test_adaptive_system.cpp.i
+.PHONY : test_adaptive_system.i
+
+# target to preprocess a source file
+test_adaptive_system.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_adaptive.dir/build.make CMakeFiles/test_adaptive.dir/test_adaptive_system.cpp.i
+.PHONY : test_adaptive_system.cpp.i
+
+test_adaptive_system.s: test_adaptive_system.cpp.s
+.PHONY : test_adaptive_system.s
+
+# target to generate assembly for a file
+test_adaptive_system.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_adaptive.dir/build.make CMakeFiles/test_adaptive.dir/test_adaptive_system.cpp.s
+.PHONY : test_adaptive_system.cpp.s
+
+test_standalone_pipeline.o: test_standalone_pipeline.cpp.o
+.PHONY : test_standalone_pipeline.o
+
+# target to build an object file
+test_standalone_pipeline.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_pipeline.dir/build.make CMakeFiles/test_pipeline.dir/test_standalone_pipeline.cpp.o
+.PHONY : test_standalone_pipeline.cpp.o
+
+test_standalone_pipeline.i: test_standalone_pipeline.cpp.i
+.PHONY : test_standalone_pipeline.i
+
+# target to preprocess a source file
+test_standalone_pipeline.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_pipeline.dir/build.make CMakeFiles/test_pipeline.dir/test_standalone_pipeline.cpp.i
+.PHONY : test_standalone_pipeline.cpp.i
+
+test_standalone_pipeline.s: test_standalone_pipeline.cpp.s
+.PHONY : test_standalone_pipeline.s
+
+# target to generate assembly for a file
+test_standalone_pipeline.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_pipeline.dir/build.make CMakeFiles/test_pipeline.dir/test_standalone_pipeline.cpp.s
+.PHONY : test_standalone_pipeline.cpp.s
+
+test_stationary_scenes.o: test_stationary_scenes.cpp.o
+.PHONY : test_stationary_scenes.o
+
+# target to build an object file
+test_stationary_scenes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stationary.dir/build.make CMakeFiles/test_stationary.dir/test_stationary_scenes.cpp.o
+.PHONY : test_stationary_scenes.cpp.o
+
+test_stationary_scenes.i: test_stationary_scenes.cpp.i
+.PHONY : test_stationary_scenes.i
+
+# target to preprocess a source file
+test_stationary_scenes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stationary.dir/build.make CMakeFiles/test_stationary.dir/test_stationary_scenes.cpp.i
+.PHONY : test_stationary_scenes.cpp.i
+
+test_stationary_scenes.s: test_stationary_scenes.cpp.s
+.PHONY : test_stationary_scenes.s
+
+# target to generate assembly for a file
+test_stationary_scenes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stationary.dir/build.make CMakeFiles/test_stationary.dir/test_stationary_scenes.cpp.s
+.PHONY : test_stationary_scenes.cpp.s
 
 # Help Target
 help:
@@ -160,11 +393,35 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... my_program"
+	@echo "... adaptive_stereo_association"
+	@echo "... enhanced_program"
+	@echo "... stereo_track_association"
+	@echo "... test_adaptive"
+	@echo "... test_pipeline"
+	@echo "... test_stationary"
+	@echo "... adaptive_stereo_association.o"
+	@echo "... adaptive_stereo_association.i"
+	@echo "... adaptive_stereo_association.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... stereo_track_association.o"
+	@echo "... stereo_track_association.i"
+	@echo "... stereo_track_association.s"
+	@echo "... test_adaptive_system.o"
+	@echo "... test_adaptive_system.i"
+	@echo "... test_adaptive_system.s"
+	@echo "... test_standalone_pipeline.o"
+	@echo "... test_standalone_pipeline.i"
+	@echo "... test_standalone_pipeline.s"
+	@echo "... test_stationary_scenes.o"
+	@echo "... test_stationary_scenes.i"
+	@echo "... test_stationary_scenes.s"
 .PHONY : help
 
 

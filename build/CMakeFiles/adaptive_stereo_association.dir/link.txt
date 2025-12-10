@@ -1,0 +1,2 @@
+/usr/bin/ar qc libadaptive_stereo_association.a CMakeFiles/adaptive_stereo_association.dir/adaptive_stereo_association.cpp.o CMakeFiles/adaptive_stereo_association.dir/stereo_track_association.cpp.o
+/usr/bin/ranlib libadaptive_stereo_association.a
